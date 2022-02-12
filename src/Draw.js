@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState, Fragment} from 'react'
+import React, {useEffect, useState, Fragment, useRef} from 'react'
 
 import {useLocation} from 'react-router-dom';
 
@@ -17,7 +17,7 @@ import ListItemText from '@mui/material/ListItemText'
 
 import dictionary from './words.js'
 
-let Form = (props) => {
+let Draw = (props) => {
 
     const location = useLocation()
 
@@ -41,9 +41,53 @@ let Form = (props) => {
     let [fifthletter, setFifthletter] = useState('')
     let [fifthlettercheck, setFifthlettercheck] = useState(false)
 
+
+    const canvasRef1 = useRef(null)
+    const contextRef = useRef(null)
+
+    useEffect(() => {
+        const canvas = canvasRef1.current
+
+        const context = canvas.getContext("2d")
+        context.scale(2,2)
+        context.lineCap = "round"
+        context.strokeStyle ="blue"
+        context.lineWidth = 5
+        contextRef.current = context
+
+
+    }, [])
+
+
+
+
     useEffect(() => {
         handleReset()
     }, [location])
+
+
+
+    let startDrawing = ({nativeEvent}) => {
+        console.log(nativeEvent.target.id)
+        const {offsetX, offsetY} = nativeEvent;
+        contextRef.current.beginPath()
+        contextRef.current.moveTo(offsetX, offsetY)
+
+
+    }
+
+    let finishDrawing = () => {
+        contextRef.current.closePath()
+        console.log('ended')
+    }
+
+    let draw = ({nativeEvent}) => {
+        const {offsetX, offsetY} = nativeEvent;
+        contextRef.current.lineTo(offsetX, offsetY)
+        contextRef.current.stroke()
+    }
+
+
 
 
     let handleChange = (event) => {
@@ -125,6 +169,7 @@ let Form = (props) => {
   
     }
 
+
     return (
         <Fragment>
         <Grid container component="main" sx={{ height: '90vh'}}
@@ -178,23 +223,16 @@ let Form = (props) => {
                                     </Typography>
                                     </Grid>
                                     <Grid item>
-                                    <TextField
-                                        margin="normal"
-                                        id="firstletter"
-                                        InputProps={{
-                                            sx: {
-                                                fontWeight: 800, 
-                                                fontSize: 25, 
-                                                borderRadius: 3,
-                                                width: 60, 
-                                                height: 60
-                                            }
-                                        }}
-                                        name="firstletter"
-                                        inputProps={{ maxLength: 1 }}
-                                        onChange={handleChange}
-                                        value={firstletter}
-                                    />
+                                        <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2, width: 90, height: 90}}>
+                                        <canvas id="id1" style={{width: 105, height: 90}}
+                                            onMouseDown={startDrawing}
+                                            onMouseUp={finishDrawing}
+                                            onMouseMove={draw}
+                                            ref={canvasRef1}
+                                            
+
+                                        ></canvas>
+                                        </Box>
                                     </Grid>
                                     <Grid item>
                                     <Typography
@@ -233,23 +271,9 @@ let Form = (props) => {
                                     </Typography>
                                     </Grid>
                                     <Grid item>
-                                    <TextField
-                                        margin="normal"
-                                        id="secondletter"
-                                        InputProps={{
-                                            sx: {
-                                                fontWeight: 800, 
-                                                fontSize: 25, 
-                                                borderRadius: 3,
-                                                width: 60, 
-                                                height: 60
-                                            }
-                                        }}
-                                        name="secondletter"
-                                        inputProps={{ maxLength: 1 }}
-                                        onChange={handleChange}
-                                        value={secondletter}
-                                    />
+                                        <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2}}>
+                                        <canvas style={{width: 90, height: 90}}></canvas>
+                                        </Box>
                                     </Grid>
                                     <Grid item>
                                     <Typography
@@ -288,23 +312,9 @@ let Form = (props) => {
                                     </Typography>
                                     </Grid>
                                     <Grid item>
-                                    <TextField
-                                        margin="normal"
-                                        id="thirdletter"
-                                        InputProps={{
-                                            sx: {
-                                                fontWeight: 800, 
-                                                fontSize: 25, 
-                                                borderRadius: 3,
-                                                width: 60, 
-                                                height: 60
-                                            }
-                                        }}
-                                        name="thirdletter"
-                                        inputProps={{ maxLength: 1 }}
-                                        onChange={handleChange}
-                                        value={thirdletter}
-                                    />
+                                        <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2}}>
+                                        <canvas style={{width: 90, height: 90}}></canvas>
+                                        </Box>
                                     </Grid>
                                     <Grid item>
                                     <Typography
@@ -343,23 +353,9 @@ let Form = (props) => {
                                     </Typography>
                                     </Grid>
                                     <Grid item>
-                                    <TextField
-                                        margin="normal"
-                                        id="fourthletter"
-                                        InputProps={{
-                                            sx: {
-                                                fontWeight: 800, 
-                                                fontSize: 25, 
-                                                borderRadius: 3,
-                                                width: 60, 
-                                                height: 60
-                                            }
-                                        }}
-                                        name="fourthletter"
-                                        inputProps={{ maxLength: 1 }}
-                                        onChange={handleChange}
-                                        value={fourthletter}
-                                    />
+                                        <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2}}>
+                                        <canvas style={{width: 90, height: 90}}></canvas>
+                                        </Box>
                                     </Grid>
                                     <Grid item>
                                     <Typography
@@ -398,23 +394,9 @@ let Form = (props) => {
                                     </Typography>
                                     </Grid>
                                     <Grid item>
-                                    <TextField
-                                        margin="normal"
-                                        id="fifthletter"
-                                        InputProps={{
-                                            sx: {
-                                                fontWeight: 800, 
-                                                fontSize: 25, 
-                                                borderRadius: 3,
-                                                width: 60, 
-                                                height: 60
-                                            }
-                                        }}
-                                        name="fifthletter"
-                                        inputProps={{ maxLength: 1 }}
-                                        onChange={handleChange}
-                                        value={fifthletter}
-                                    />
+                                        <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2}}>
+                                            <canvas style={{width: 90, height: 90}}></canvas>
+                                        </Box>
                                     </Grid>
                                     <Grid item>
                                     <Typography
@@ -519,4 +501,4 @@ let Form = (props) => {
     )
 }
 
-export default Form;
+export default Draw;
