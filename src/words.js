@@ -4,6 +4,5 @@ dictionary = dictionary.split(" ")
 
 dictionary = dictionary.filter(element => element.length === 5)
 
-
 export default dictionary;
 
