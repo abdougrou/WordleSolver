@@ -5,5 +5,5 @@ list = list.split(" ")
 list = list.filter(element => element.length == 5)
 
 
-
 console.log(list)
+
