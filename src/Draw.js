@@ -44,19 +44,61 @@ let Draw = (props) => {
 
 
     const canvasRef1 = useRef(null)
-    const contextRef = useRef(null)
+    const canvasRef2 = useRef(null)
+    const canvasRef3 = useRef(null)
+    const canvasRef4 = useRef(null)
+    const canvasRef5 = useRef(null)
+
+    const contextRef1 = useRef(null)
+    const contextRef2 = useRef(null)
+    const contextRef3 = useRef(null)
+    const contextRef4 = useRef(null)
+    const contextRef5 = useRef(null)
 
     useEffect(() => {
-        const canvas = canvasRef1.current
 
-        const context = canvas.getContext("2d")
-        context.scale(2,2)
-        context.lineCap = "round"
-        context.strokeStyle ="blue"
-        context.lineWidth = 5
-        contextRef.current = context
+    
+        let canvas1 = canvasRef1.current
+        let context1 = canvas1.getContext("2d")
+        context1.scale(2,2)
+        context1.lineCap = "round"
+        context1.strokeStyle ="blue"
+        context1.lineWidth = 5
+        contextRef1.current = context1
 
+        let canvas2 = canvasRef2.current
+        let context2 = canvas2.getContext("2d")
+        context2.scale(2,2)
+        context2.lineCap = "round"
+        context2.strokeStyle ="blue"
+        context2.lineWidth = 5
+        contextRef2.current = context2
 
+        let canvas3 = canvasRef3.current
+        let context3 = canvas3.getContext("2d")
+        context3.scale(2,2)
+        context3.lineCap = "round"
+        context3.strokeStyle ="blue"
+        context3.lineWidth = 5
+        contextRef3.current = context3
+
+        let canvas4 = canvasRef4.current
+        let context4 = canvas4.getContext("2d")
+        context4.scale(2,2)
+        context4.lineCap = "round"
+        context4.strokeStyle ="blue"
+        context4.lineWidth = 5
+        contextRef4.current = context4
+
+        let canvas5 = canvasRef5.current
+        let context5 = canvas5.getContext("2d")
+        context5.scale(2,2)
+        context5.lineCap = "round"
+        context5.strokeStyle ="blue"
+        context5.lineWidth = 5
+        contextRef5.current = context5
+        
+       
     }, [])
 
 
@@ -70,47 +112,81 @@ let Draw = (props) => {
 
     let startDrawing = ({nativeEvent}) => {
         setDraw1(true)
-        console.log(nativeEvent.target.id)
         const {offsetX, offsetY} = nativeEvent;
+        let contextRef;
+        if (nativeEvent.srcElement.id === 'id1'){
+            contextRef = contextRef1
+        } else if (nativeEvent.srcElement.id === "id2"){
+            contextRef = contextRef2
+        } else if (nativeEvent.srcElement.id === "id3"){
+            contextRef = contextRef3
+        } else if (nativeEvent.srcElement.id === "id4"){
+            contextRef = contextRef4
+        } else if (nativeEvent.srcElement.id === "id5"){
+            contextRef = contextRef5
+        }
         contextRef.current.beginPath()
         contextRef.current.moveTo(offsetX, offsetY)
 
 
     }
 
-    let finishDrawing = () => {
-        
+    let finishDrawing = (event) => {
+
+        let contextRef;
+        if (event.target.id === 'id1'){
+            contextRef = contextRef1
+        } else if (event.target.id === "id2"){
+            contextRef = contextRef2
+        } else if (event.target.id === "id3"){
+            contextRef = contextRef3
+        } else if (event.target.id === "id4"){
+            contextRef = contextRef4
+        } else if (event.target.id === "id5"){
+            contextRef = contextRef5
+        }
+
+        let c = document.getElementById(event.target.id)
         contextRef.current.closePath()
-        console.log('ended')
+        let dataURL = c.toDataURL('image/png')
+        console.log(dataURL)
+
+        if (event.target.id === 'id1'){
+            setFirstletter(dataURL)
+        } else if (event.target.id === "id2"){
+            setSecondletter(dataURL)
+        } else if (event.target.id === "id3"){
+            setThirdletter(dataURL)
+        } else if (event.target.id === "id4"){
+            setFourthletter(dataURL)
+        } else if (event.target.id === "id5"){
+            setFifthletter(dataURL)
+        }
+
         setDraw1(false)
-    
-        
     }
 
     let draw = ({nativeEvent}) => {
-
         if (draw1){
             const {offsetX, offsetY} = nativeEvent;
+            let contextRef;
+            if (nativeEvent.srcElement.id === 'id1'){
+                contextRef = contextRef1
+            } else if (nativeEvent.srcElement.id === "id2"){
+                contextRef = contextRef2
+            } else if (nativeEvent.srcElement.id === "id3"){
+                contextRef = contextRef3
+            } else if (nativeEvent.srcElement.id === "id4"){
+                contextRef = contextRef4
+            } else if (nativeEvent.srcElement.id === "id5"){
+                contextRef = contextRef5
+            }
             contextRef.current.lineTo(offsetX, offsetY)
             contextRef.current.stroke()
         }
         
     }
 
-
-    let handleChange = (event) => {
-        if (event.target.name === "firstletter") {
-            setFirstletter(event.target.value.toUpperCase())
-        } else if (event.target.name === "secondletter"){
-            setSecondletter(event.target.value.toUpperCase())
-        } else if (event.target.name === "thirdletter"){
-            setThirdletter(event.target.value.toUpperCase())
-        } else if (event.target.name === "fourthletter"){
-            setFourthletter(event.target.value.toUpperCase())
-        } else if (event.target.name === "fifthletter"){
-            setFifthletter(event.target.value.toUpperCase())
-        } 
-    }
     
     let handleSubmit = (event) => {
         event.preventDefault()
@@ -232,13 +308,13 @@ let Draw = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2, width: 90, height: 90}}>
-                                        <canvas id="id1" style={{width: 100, height: 90}}
+                                        <canvas 
+                                            id="id1" 
+                                            style={{width: 100, height: 90}}
                                             onMouseDown={startDrawing}
                                             onMouseUp={finishDrawing}
                                             onMouseMove={draw}
                                             ref={canvasRef1}
-                                            
-
                                         ></canvas>
                                         </Box>
                                     </Grid>
@@ -280,7 +356,14 @@ let Draw = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2}}>
-                                        <canvas style={{width: 90, height: 90}}></canvas>
+                                        <canvas 
+                                            id="id2" 
+                                            style={{width: 100, height: 90}}
+                                            onMouseDown={startDrawing}
+                                            onMouseUp={finishDrawing}
+                                            onMouseMove={draw}
+                                            ref={canvasRef2}
+                                        ></canvas>
                                         </Box>
                                     </Grid>
                                     <Grid item>
@@ -321,7 +404,14 @@ let Draw = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2}}>
-                                        <canvas style={{width: 90, height: 90}}></canvas>
+                                        <canvas 
+                                            id="id3" 
+                                            style={{width: 100, height: 90}}
+                                            onMouseDown={startDrawing}
+                                            onMouseUp={finishDrawing}
+                                            onMouseMove={draw}
+                                            ref={canvasRef3}
+                                        ></canvas>
                                         </Box>
                                     </Grid>
                                     <Grid item>
@@ -362,7 +452,14 @@ let Draw = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2}}>
-                                        <canvas style={{width: 90, height: 90}}></canvas>
+                                        <canvas 
+                                            id="id4" 
+                                            style={{width: 100, height: 90}}
+                                            onMouseDown={startDrawing}
+                                            onMouseUp={finishDrawing}
+                                            onMouseMove={draw}
+                                            ref={canvasRef4}
+                                        ></canvas>
                                         </Box>
                                     </Grid>
                                     <Grid item>
@@ -403,7 +500,14 @@ let Draw = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2}}>
-                                            <canvas style={{width: 90, height: 90}}></canvas>
+                                        <canvas 
+                                            id="id5" 
+                                            style={{width: 100, height: 90}}
+                                            onMouseDown={startDrawing}
+                                            onMouseUp={finishDrawing}
+                                            onMouseMove={draw}
+                                            ref={canvasRef5}
+                                        ></canvas>
                                         </Box>
                                     </Grid>
                                     <Grid item>
