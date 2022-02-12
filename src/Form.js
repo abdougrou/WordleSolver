@@ -9,10 +9,18 @@ import Paper from '@mui/material/Paper'
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText'
 
 import dictionary from './words.js'
 
 let Form = (props) => {
+
+    let [loading, setLoading] = useState(false)
+    let [results, setResults] = useState(false)
+    let [matches, setMatches] = useState([1, 2, 3, 3,4, 5, 5, 6, 6,6])
+
 
     let [firstletter, setFirstletter] = useState('')
     let [firstlettercheck, setFirstlettercheck] = useState(false)
@@ -62,9 +70,7 @@ let Form = (props) => {
         if (fifthletter !== "") letters.push([fifthletter.toLowerCase(), fifthlettercheck])
         else if (fourthletter === "") letters.push(["", false])
 
-
         event.preventDefault()
-        console.log(letters)
     }
 
 
@@ -99,314 +105,357 @@ let Form = (props) => {
                     <Typography component="h1" variant="h5" color='inherit' sx={{fontWeight: 800}}>
                         Wordle Resolver
                     </Typography>
-                    <Box component="form" noValidate  sx={{ m: 5 }}
-                        onSubmit={handleSubmit}
-                    >
-                        <Grid
-                        direction="row"
-                        container
-                        alignItems="center"
-                        justifyContent={'center'}
-                        spacing={2}
-                        >
-                            <Grid 
-                                item
-                                alignItems="center"
-                                justifyContent={'center'}
-                                container
-                                direction="column"
-                                xs={6} sm={2}
-                            >
-                                <Grid item>
-                                <Typography
-                                    textAlign={'center'}
-                                    variant="body1"
-                                    sx={{fontWeight: 700}}
-                                >
-                                    Letter 1
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <TextField
-                                    margin="normal"
-                                    id="firstletter"
-                                    InputProps={{
-                                        sx: {
-                                            fontWeight: 800, 
-                                            fontSize: 25, 
-                                            borderRadius: 3,
-                                            width: 60, 
-                                            height: 60
-                                        }
-                                    }}
-                                    name="firstletter"
-                                    inputProps={{ maxLength: 1 }}
-                                    onChange={handleChange}
-                                    value={firstletter}
-                                />
-                                </Grid>
-                                <Grid item>
-                                <Typography
-                                    sx={{mt: 2, px: 2}}
-                                    textAlign={'center'}
-                                    variant="body2"
-                                >
-                                    Right place
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <Checkbox 
-                                    checked={firstlettercheck}
-                                    onChange={e => {
-                                            setFirstlettercheck(!firstlettercheck)
-                                        }
-                                    } 
-                                />
-                                </Grid>    
-                            </Grid>
-                            <Grid 
-                                item
-                                alignItems="center"
-                                justifyContent={'center'}
-                                container
-                                direction="column"
-                                xs={6} sm={2}
-                            >
-                                <Grid item>
-                                <Typography
-                                    textAlign={'center'}
-                                    variant="body1"
-                                    sx={{fontWeight: 700}}
-                                >
-                                    Letter 2
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <TextField
-                                    margin="normal"
-                                    id="secondletter"
-                                    InputProps={{
-                                        sx: {
-                                            fontWeight: 800, 
-                                            fontSize: 25, 
-                                            borderRadius: 3,
-                                            width: 60, 
-                                            height: 60
-                                        }
-                                    }}
-                                    name="secondletter"
-                                    inputProps={{ maxLength: 1 }}
-                                    onChange={handleChange}
-                                    value={secondletter}
-                                />
-                                </Grid>
-                                <Grid item>
-                                <Typography
-                                    sx={{mt: 2, px: 2}}
-                                    textAlign={'center'}
-                                    variant="body2"
-                                >
-                                    Right place
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <Checkbox 
-                                    checked={secondlettercheck}
-                                    onChange={e => {
-                                            setSecondlettercheck(!secondlettercheck)
-                                        }
-                                    } 
-                                />
-                                </Grid>    
-                            </Grid>
-                            <Grid 
-                                item
-                                alignItems="center"
-                                justifyContent={'center'}
-                                container
-                                direction="column"
-                                xs={6} sm={2}
-                            >
-                                <Grid item>
-                                <Typography
-                                    textAlign={'center'}
-                                    variant="body1"
-                                    sx={{fontWeight: 700}}
-                                >
-                                    Letter 3
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <TextField
-                                    margin="normal"
-                                    id="thirdletter"
-                                    InputProps={{
-                                        sx: {
-                                            fontWeight: 800, 
-                                            fontSize: 25, 
-                                            borderRadius: 3,
-                                            width: 60, 
-                                            height: 60
-                                        }
-                                    }}
-                                    name="thirdletter"
-                                    inputProps={{ maxLength: 1 }}
-                                    onChange={handleChange}
-                                    value={thirdletter}
-                                />
-                                </Grid>
-                                <Grid item>
-                                <Typography
-                                    sx={{mt: 2, px: 2}}
-                                    textAlign={'center'}
-                                    variant="body2"
-                                >
-                                    Right place
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <Checkbox 
-                                    checked={thirdlettercheck}
-                                    onChange={e => {
-                                            setThirdlettercheck(!thirdlettercheck)
-                                        }
-                                    } 
-                                />
-                                </Grid>    
-                            </Grid>
-                            <Grid 
-                                item
-                                alignItems="center"
-                                justifyContent={'center'}
-                                container
-                                direction="column"
-                                xs={6} sm={2}
-                            >
-                                <Grid item>
-                                <Typography
-                                    textAlign={'center'}
-                                    variant="body1"
-                                    sx={{fontWeight: 700}}
-                                >
-                                    Letter 4
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <TextField
-                                    margin="normal"
-                                    id="fourthletter"
-                                    InputProps={{
-                                        sx: {
-                                            fontWeight: 800, 
-                                            fontSize: 25, 
-                                            borderRadius: 3,
-                                            width: 60, 
-                                            height: 60
-                                        }
-                                    }}
-                                    name="fourthletter"
-                                    inputProps={{ maxLength: 1 }}
-                                    onChange={handleChange}
-                                    value={fourthletter}
-                                />
-                                </Grid>
-                                <Grid item>
-                                <Typography
-                                    sx={{mt: 2, px: 2}}
-                                    textAlign={'center'}
-                                    variant="body2"
-                                >
-                                    Right place
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <Checkbox 
-                                    checked={fourthlettercheck}
-                                    onChange={e => {
-                                            setFourthlettercheck(!fourthlettercheck)
-                                        }
-                                    } 
-                                />
-                                </Grid>    
-                            </Grid>
-                            <Grid 
-                                item
-                                alignItems="center"
-                                justifyContent={'center'}
-                                container
-                                direction="column"
-                                xs={6} sm={2}
-                            >
-                                <Grid item>
-                                <Typography
-                                    textAlign={'center'}
-                                    variant="body1"
-                                    sx={{fontWeight: 700}}
-                                >
-                                    Letter 5
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <TextField
-                                    margin="normal"
-                                    id="fifthletter"
-                                    InputProps={{
-                                        sx: {
-                                            fontWeight: 800, 
-                                            fontSize: 25, 
-                                            borderRadius: 3,
-                                            width: 60, 
-                                            height: 60
-                                        }
-                                    }}
-                                    name="fifthletter"
-                                    inputProps={{ maxLength: 1 }}
-                                    onChange={handleChange}
-                                    value={fifthletter}
-                                />
-                                </Grid>
-                                <Grid item>
-                                <Typography
-                                    sx={{mt: 2, px: 2}}
-                                    textAlign={'center'}
-                                    variant="body2"
-                                >
-                                    Right place
-                                </Typography>
-                                </Grid>
-                                <Grid item>
-                                <Checkbox 
-                                    checked={fifthlettercheck}
-                                    onChange={e => {
-                                            setFifthlettercheck(!fifthlettercheck)
-                                        }
-                                    } 
-                                />
-                                </Grid>    
-                            </Grid>
-                        </Grid>
 
-                    
-                        <Button
-                            type="submit"
-                            fullWidth
-                            color="secondary"
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2,}}
-                            
-                        >
-                        {/* {loading ? 
-                            (<CircularProgress size={24} color="primary" />): ('Sign up')
-                        } */}
+                    {  results ? (
 
-                        <Typography variant="body1" >
-                            See Possible Answers
-                        </Typography>
+                        <Box component="form" noValidate  sx={{ m: 5 }}
+                            onSubmit={handleSubmit}
+                        >
+                            <Grid
+                            direction="row"
+                            container
+                            alignItems="center"
+                            justifyContent={'center'}
+                            spacing={2}
+                            >
+                                <Grid 
+                                    item
+                                    alignItems="center"
+                                    justifyContent={'center'}
+                                    container
+                                    direction="column"
+                                    xs={6} sm={2}
+                                >
+                                    <Grid item>
+                                    <Typography
+                                        textAlign={'center'}
+                                        variant="body1"
+                                        sx={{fontWeight: 700}}
+                                    >
+                                        Letter 1
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <TextField
+                                        margin="normal"
+                                        id="firstletter"
+                                        InputProps={{
+                                            sx: {
+                                                fontWeight: 800, 
+                                                fontSize: 25, 
+                                                borderRadius: 3,
+                                                width: 60, 
+                                                height: 60
+                                            }
+                                        }}
+                                        name="firstletter"
+                                        inputProps={{ maxLength: 1 }}
+                                        onChange={handleChange}
+                                        value={firstletter}
+                                    />
+                                    </Grid>
+                                    <Grid item>
+                                    <Typography
+                                        sx={{mt: 2, px: 2}}
+                                        textAlign={'center'}
+                                        variant="body2"
+                                    >
+                                        Right place
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <Checkbox 
+                                        checked={firstlettercheck}
+                                        onChange={e => {
+                                                setFirstlettercheck(!firstlettercheck)
+                                            }
+                                        } 
+                                    />
+                                    </Grid>    
+                                </Grid>
+                                <Grid 
+                                    item
+                                    alignItems="center"
+                                    justifyContent={'center'}
+                                    container
+                                    direction="column"
+                                    xs={6} sm={2}
+                                >
+                                    <Grid item>
+                                    <Typography
+                                        textAlign={'center'}
+                                        variant="body1"
+                                        sx={{fontWeight: 700}}
+                                    >
+                                        Letter 2
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <TextField
+                                        margin="normal"
+                                        id="secondletter"
+                                        InputProps={{
+                                            sx: {
+                                                fontWeight: 800, 
+                                                fontSize: 25, 
+                                                borderRadius: 3,
+                                                width: 60, 
+                                                height: 60
+                                            }
+                                        }}
+                                        name="secondletter"
+                                        inputProps={{ maxLength: 1 }}
+                                        onChange={handleChange}
+                                        value={secondletter}
+                                    />
+                                    </Grid>
+                                    <Grid item>
+                                    <Typography
+                                        sx={{mt: 2, px: 2}}
+                                        textAlign={'center'}
+                                        variant="body2"
+                                    >
+                                        Right place
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <Checkbox 
+                                        checked={secondlettercheck}
+                                        onChange={e => {
+                                                setSecondlettercheck(!secondlettercheck)
+                                            }
+                                        } 
+                                    />
+                                    </Grid>    
+                                </Grid>
+                                <Grid 
+                                    item
+                                    alignItems="center"
+                                    justifyContent={'center'}
+                                    container
+                                    direction="column"
+                                    xs={6} sm={2}
+                                >
+                                    <Grid item>
+                                    <Typography
+                                        textAlign={'center'}
+                                        variant="body1"
+                                        sx={{fontWeight: 700}}
+                                    >
+                                        Letter 3
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <TextField
+                                        margin="normal"
+                                        id="thirdletter"
+                                        InputProps={{
+                                            sx: {
+                                                fontWeight: 800, 
+                                                fontSize: 25, 
+                                                borderRadius: 3,
+                                                width: 60, 
+                                                height: 60
+                                            }
+                                        }}
+                                        name="thirdletter"
+                                        inputProps={{ maxLength: 1 }}
+                                        onChange={handleChange}
+                                        value={thirdletter}
+                                    />
+                                    </Grid>
+                                    <Grid item>
+                                    <Typography
+                                        sx={{mt: 2, px: 2}}
+                                        textAlign={'center'}
+                                        variant="body2"
+                                    >
+                                        Right place
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <Checkbox 
+                                        checked={thirdlettercheck}
+                                        onChange={e => {
+                                                setThirdlettercheck(!thirdlettercheck)
+                                            }
+                                        } 
+                                    />
+                                    </Grid>    
+                                </Grid>
+                                <Grid 
+                                    item
+                                    alignItems="center"
+                                    justifyContent={'center'}
+                                    container
+                                    direction="column"
+                                    xs={6} sm={2}
+                                >
+                                    <Grid item>
+                                    <Typography
+                                        textAlign={'center'}
+                                        variant="body1"
+                                        sx={{fontWeight: 700}}
+                                    >
+                                        Letter 4
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <TextField
+                                        margin="normal"
+                                        id="fourthletter"
+                                        InputProps={{
+                                            sx: {
+                                                fontWeight: 800, 
+                                                fontSize: 25, 
+                                                borderRadius: 3,
+                                                width: 60, 
+                                                height: 60
+                                            }
+                                        }}
+                                        name="fourthletter"
+                                        inputProps={{ maxLength: 1 }}
+                                        onChange={handleChange}
+                                        value={fourthletter}
+                                    />
+                                    </Grid>
+                                    <Grid item>
+                                    <Typography
+                                        sx={{mt: 2, px: 2}}
+                                        textAlign={'center'}
+                                        variant="body2"
+                                    >
+                                        Right place
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <Checkbox 
+                                        checked={fourthlettercheck}
+                                        onChange={e => {
+                                                setFourthlettercheck(!fourthlettercheck)
+                                            }
+                                        } 
+                                    />
+                                    </Grid>    
+                                </Grid>
+                                <Grid 
+                                    item
+                                    alignItems="center"
+                                    justifyContent={'center'}
+                                    container
+                                    direction="column"
+                                    xs={6} sm={2}
+                                >
+                                    <Grid item>
+                                    <Typography
+                                        textAlign={'center'}
+                                        variant="body1"
+                                        sx={{fontWeight: 700}}
+                                    >
+                                        Letter 5
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <TextField
+                                        margin="normal"
+                                        id="fifthletter"
+                                        InputProps={{
+                                            sx: {
+                                                fontWeight: 800, 
+                                                fontSize: 25, 
+                                                borderRadius: 3,
+                                                width: 60, 
+                                                height: 60
+                                            }
+                                        }}
+                                        name="fifthletter"
+                                        inputProps={{ maxLength: 1 }}
+                                        onChange={handleChange}
+                                        value={fifthletter}
+                                    />
+                                    </Grid>
+                                    <Grid item>
+                                    <Typography
+                                        sx={{mt: 2, px: 2}}
+                                        textAlign={'center'}
+                                        variant="body2"
+                                    >
+                                        Right place
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                    <Checkbox 
+                                        checked={fifthlettercheck}
+                                        onChange={e => {
+                                                setFifthlettercheck(!fifthlettercheck)
+                                            }
+                                        } 
+                                    />
+                                    </Grid>    
+                                </Grid>
+                            </Grid>
+
                         
+                            <Button
+                                type="submit"
+                                fullWidth
+                            
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2,}}
+                                
+                            >
+                            {loading ? 
+                                (<CircularProgress size={30}  sx={{color: 'white'}}/>): (
+                                    <Typography variant="body1" >
+                                        See Possible Answers
+                                    </Typography>
+                                )
+                            }
+
+                            </Button>
+                        
+                
+                        </Box>
+
+
+
+
+                    ): (
+                        <Fragment>
+                        <Box sx={{border: 'solid 1px black', px: '15%', mt: 3}} style={{height: 400, overflowY: 'scroll'}}>
+                            <List>
+
+                                {
+                                    matches.map((element, i) => (
+                                        <ListItem key={i}>
+                                            <ListItemText>
+                                                <Typography variant="h6">
+                                                    avatar
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                    ))
+                                }
+                               
+                               
+                            </List>
+
+                            
+                        </Box>
+
+                        <Button
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2,}}   
+                            >
+                            <Typography variant="body1" >
+                                Try Again
+                            </Typography>
                         </Button>
+                        </Fragment>
+
+                    )}
+
                     
-             
-                    </Box>
                 </Box>
             </Grid>
         </Grid>

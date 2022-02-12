@@ -2,10 +2,7 @@ let dictionary = "a  aa  aaa  aachen  aardvark  aardvarks  aaron  ab  aba a  aa 
 
 dictionary = dictionary.split(" ")
 
-dictionary = dictionary.filter(element => element.length == 5)
-
-
-console.log(dictionary)
+dictionary = dictionary.filter(element => element.length === 5)
 
 
 export default dictionary;
