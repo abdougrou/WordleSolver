@@ -502,6 +502,7 @@ let Form = (props) => {
                             variant="contained"
                             sx={{ mt: 3, mb: 2,}}   
                             onClick={handleReset}
+                            color="primary"
                             >
                             <Typography variant="body1" >
                                 Try Again

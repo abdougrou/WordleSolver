@@ -4,8 +4,8 @@ import React, {useEffect, useState, Fragment, useRef} from 'react'
 import {useLocation} from 'react-router-dom';
 
 //import vision from '@google-cloud/vision';
-import vision from "react-cloud-vision-api";
-
+//import vision from "react-cloud-vision-api";
+import axios from 'axios'
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
@@ -23,7 +23,7 @@ import dictionary from './words.js'
 
 let Draw = (props) => {
 
-  
+    // vision.init({ auth: 'api -key'})
     const location = useLocation()
 
     const [draw1, setDraw1] = useState(false)
@@ -168,21 +168,26 @@ let Draw = (props) => {
             setFifthletter(dataURL)
         }
 
-        try {
 
-            const res = new vision.Request({
-                image: new vision.Image({
-                  base64: dataURL,
-                }),
-                features: [
-                  new vision.Feature('TEXT_DETECTION', 4),
-                ]
-            })
-           
-          
-        } catch (e) {
-            console.log(e)
-        }
+
+        fetch(`https://api.ocr.space/parse/imageurl?apikey=K84507537888957&url=https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`)
+        .then((res) => {
+            res.json()
+        })
+        .then((data) => {
+            console.log(data)
+        })
+        // const req = new vision.Request({
+        //     image: new vision.Image({
+        //       base64: dataURL,
+        //     }),
+        //     features: [
+        //       new vision.Feature('TEXT_DETECTION', 4),
+        //     ]
+        // })
+
+  
+ 
         
         setDraw1(false)
     }
