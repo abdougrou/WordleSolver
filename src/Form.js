@@ -52,7 +52,7 @@ let Form = (props) => {
     }
     
     let handleSubmit = (event) => {
-
+        event.preventDefault()
         setLoading(true)
         let letters = []
 
@@ -71,7 +71,7 @@ let Form = (props) => {
         if (fifthletter !== "") letters.push([fifthletter.toLowerCase(), fifthlettercheck])
         else if (fifthletter === "") letters.push(["", false])
 
-        event.preventDefault()
+        
         console.log(letters)
         getMatches(letters)
     }
@@ -79,18 +79,20 @@ let Form = (props) => {
 
     let getMatches = (letters) => {
         let list = dictionary;
-        
         for ( let i = 0; i < 5; i++) {
             // Letter
-            if(letters[i][1] && letters[i][1] !== "") {
+            if(letters[i][1] && letters[i][0] !== "") {
                 list = list.filter(element => element.charAt(i) === letters[i][0]) // right place
-            } else if (letters[i][0] !== "") {
-                list = list.filter(element => (element.charAt(i).toLowerCase() !== letters[i][0]) && (element.includes(letters[i][0]))) // wrong place
+               
+            } else if (!letters[i][1] && letters[i][0] !== "") {
+                list = list.filter(element => {
+                    return element.charAt(i).toLowerCase() !== letters[i][0] && element.includes(letters[i][0])
+                }) // wrong place
             }
         }
-        console.log(list);
+  
 
-        setMatches(list)
+        setMatches(list.splice(0, list.length/2))
         setLoading(false)
         setResults(true)
         
@@ -457,18 +459,31 @@ let Form = (props) => {
                             <List>
 
                                 {
-                                    matches.map((element, i) => (
-                                        <ListItem key={i}>
+                                    matches.length === 0 ?  (
+                                        <ListItem >
                                             <ListItemText>
                                                 <Typography variant="h6">
-                                                    {element}
+                                                    No word match
                                                 </Typography>
                                             </ListItemText>
                                         </ListItem>
-                                    ))
+                                    ): (
+                                        <Fragment>
+                                            {
+                                                matches.map((element, i) => (
+                                                    <ListItem key={i}>
+                                                        <ListItemText>
+                                                            <Typography variant="h6">
+                                                                {element}
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                ))
+                                            }
+                                        </Fragment>
+                                    )
                                 }
-                               
-                               
+                                
                             </List>
 
                             
