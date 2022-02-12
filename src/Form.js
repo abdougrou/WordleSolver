@@ -17,10 +17,9 @@ import dictionary from './words.js'
 
 let Form = (props) => {
 
-    let [list, setList] = useState([])
     let [loading, setLoading] = useState(false)
     let [results, setResults] = useState(false)
-    let [matches, setMatches] = useState([1, 2, 3, 3,4, 5, 5, 6, 6,6])
+    let [matches, setMatches] = useState([])
 
 
     let [firstletter, setFirstletter] = useState('')
@@ -54,6 +53,7 @@ let Form = (props) => {
     
     let handleSubmit = (event) => {
 
+        setLoading(true)
         let letters = []
 
         if (firstletter !== "") letters.push([firstletter.toLowerCase(), firstlettercheck])
@@ -78,11 +78,41 @@ let Form = (props) => {
 
 
     let getMatches = (letters) => {
+        let list = dictionary;
         
+        for ( let i = 0; i < 5; i++) {
+            // Letter
+            if(letters[i][1] && letters[i][1] !== "") {
+                list = list.filter(element => element.charAt(i) === letters[i][0]) // right place
+            } else if (letters[i][0] !== "") {
+                list = list.filter(element => (element.charAt(i).toLowerCase() !== letters[i][0]) && (element.includes(letters[i][0]))) // wrong place
+            }
+        }
+        console.log(list);
+
+        setMatches(list)
+        setLoading(false)
         setResults(true)
+        
     }
 
-git 
+    let handleReset = () => {
+
+        setFirstletter('')
+        setFirstlettercheck(false)    
+        setSecondletter('')
+        setSecondlettercheck(false)
+        setThirdletter('')
+        setThirdlettercheck(false)
+        setFourthletter('')
+        setFourthlettercheck(false)
+        setFifthletter('')
+        setFifthlettercheck(false)
+        setResults(false)
+        setMatches([])
+        setLoading(false)
+  
+    }
 
     return (
         <Fragment>
@@ -427,7 +457,7 @@ git
                             <List>
 
                                 {
-                                    list.map((element, i) => (
+                                    matches.map((element, i) => (
                                         <ListItem key={i}>
                                             <ListItemText>
                                                 <Typography variant="h6">
@@ -447,6 +477,7 @@ git
                         <Button
                             variant="contained"
                             sx={{ mt: 3, mb: 2,}}   
+                            onClick={handleReset}
                             >
                             <Typography variant="body1" >
                                 Try Again
