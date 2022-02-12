@@ -21,6 +21,7 @@ let Draw = (props) => {
 
     const location = useLocation()
 
+    const [draw1, setDraw1] = useState(false)
     let [loading, setLoading] = useState(false)
     let [results, setResults] = useState(false)
     let [matches, setMatches] = useState([])
@@ -68,6 +69,7 @@ let Draw = (props) => {
 
 
     let startDrawing = ({nativeEvent}) => {
+        setDraw1(true)
         console.log(nativeEvent.target.id)
         const {offsetX, offsetY} = nativeEvent;
         contextRef.current.beginPath()
@@ -77,17 +79,23 @@ let Draw = (props) => {
     }
 
     let finishDrawing = () => {
+        
         contextRef.current.closePath()
         console.log('ended')
+        setDraw1(false)
+    
+        
     }
 
     let draw = ({nativeEvent}) => {
-        const {offsetX, offsetY} = nativeEvent;
-        contextRef.current.lineTo(offsetX, offsetY)
-        contextRef.current.stroke()
+
+        if (draw1){
+            const {offsetX, offsetY} = nativeEvent;
+            contextRef.current.lineTo(offsetX, offsetY)
+            contextRef.current.stroke()
+        }
+        
     }
-
-
 
 
     let handleChange = (event) => {
@@ -224,7 +232,7 @@ let Draw = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Box sx={{border: 'solid 1px black', mt: 2, borderRadius: 2, mx: 2, width: 90, height: 90}}>
-                                        <canvas id="id1" style={{width: 105, height: 90}}
+                                        <canvas id="id1" style={{width: 100, height: 90}}
                                             onMouseDown={startDrawing}
                                             onMouseUp={finishDrawing}
                                             onMouseMove={draw}
