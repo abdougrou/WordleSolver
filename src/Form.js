@@ -71,14 +71,29 @@ let Form = (props) => {
         else if (fourthletter === "") letters.push(["", false])
 
         event.preventDefault()
+        console.log(letters)
+        getMatches(letters)
     }
 
 
     let getMatches = (letters) => {
+        let list = dictionary;
+        // letters[0][0]  letters[0][1]
+        if(letters[0][1]) list.filter(element => element[0] === letters[0][0]) // right place
+        else if (letters[0][0] !== "") list.filter(element => element.contains(letters[0][0])) // wrong place
 
+        if(letters[1][1]) list.filter(element => element[1] === letters[1][0])
+        else if (letters[1][0] !== "") list.filter(element => element.contains(letters[1][0]))
 
+        if(letters[2][1]) list.filter(element => element[2] === letters[2][0])
+        else if (letters[2][0] !== "") list.filter(element => element.contains(letters[2][0]))
 
+        if(letters[3][1]) list.filter(element => element[3] === letters[3][0])
+        else if (letters[3][0] !== "") list.filter(element => element.contains(letters[3][0]))
 
+        if(letters[4][1]) list.filter(element => element[4] === letters[4][0])
+        else if (letters[4][0] !== "") list.filter(element => element.contains(letters[4][0]))
+        console.log(list)
     }
 
 
