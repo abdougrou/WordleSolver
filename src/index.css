@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("../public/transparentBack.jpg");
+  background: #222b45;
+  background-image: url("../public/background.png");
 }
 
 code {
