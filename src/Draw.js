@@ -5,7 +5,7 @@ import {useLocation} from 'react-router-dom';
 
 //import vision from '@google-cloud/vision';
 //import vision from "react-cloud-vision-api";
-import axios from 'axios'
+// import axios from 'axios'
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
