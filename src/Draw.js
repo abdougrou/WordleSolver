@@ -3,6 +3,10 @@ import React, {useEffect, useState, Fragment, useRef} from 'react'
 
 import {useLocation} from 'react-router-dom';
 
+//import vision from '@google-cloud/vision';
+import vision from "react-cloud-vision-api";
+
+
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -19,6 +23,7 @@ import dictionary from './words.js'
 
 let Draw = (props) => {
 
+  
     const location = useLocation()
 
     const [draw1, setDraw1] = useState(false)
@@ -163,6 +168,22 @@ let Draw = (props) => {
             setFifthletter(dataURL)
         }
 
+        try {
+
+            const res = new vision.Request({
+                image: new vision.Image({
+                  base64: dataURL,
+                }),
+                features: [
+                  new vision.Feature('TEXT_DETECTION', 4),
+                ]
+            })
+           
+          
+        } catch (e) {
+            console.log(e)
+        }
+        
         setDraw1(false)
     }
 
