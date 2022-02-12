@@ -32,6 +32,13 @@ export const light = {
       main: '#FFFFFF',
       contrastText: '#333333',
     },
+    warning: {
+      main: '#FFFFFF',
+      contrastText: '#333333',
+    },
+    background: {
+      default: "#544A7D", 
+    },
   }
 }
 
@@ -50,6 +57,13 @@ export const dark = {
       main: '#FFFFFF',
       contrastText: '#FFFFFF',
     },
+    warning: {
+      main: '#222b45',
+      contrastText: '#333333',
+    },
+    background: {
+      default: "#544A7D", 
+    },
   },
 
 }
@@ -66,6 +80,14 @@ function App() {
   appliedTheme = responsiveFontSizes(appliedTheme)
 
   let handleChange = () => {
+
+    let root = document.getElementById("root")
+    if (theme) {
+      document.body.style.backgroundColor = "#222b45"
+    } else {
+      document.body.style.backgroundColor = "white"
+    }
+
     setTheme(!theme)
   }
 

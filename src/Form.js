@@ -130,15 +130,19 @@ let Form = (props) => {
         <Grid container component="main" sx={{ height: '90vh'}}
             alignItems="center"
             justifyContent={'center'}
+            
         >
 
-            <Grid item xs={12} sm={10} md={10} lg={8} component={Paper} elevation={6}  >
+            <Grid item xs={12} sm={10} md={10} lg={8} component={Paper} elevation={6} 
+                sx={{backgroundColor: 'warning.main'}}
+            >
                 <Box
                     sx={{
                     my: 8,                   
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    
                     }}
                 >
                     {/* <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
