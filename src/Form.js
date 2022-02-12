@@ -17,6 +17,7 @@ import dictionary from './words.js'
 
 let Form = (props) => {
 
+    let [list, setList] = useState([])
     let [loading, setLoading] = useState(false)
     let [results, setResults] = useState(false)
     let [matches, setMatches] = useState([1, 2, 3, 3,4, 5, 5, 6, 6,6])
@@ -68,7 +69,7 @@ let Form = (props) => {
         else if (fourthletter === "") letters.push(["", false])
 
         if (fifthletter !== "") letters.push([fifthletter.toLowerCase(), fifthlettercheck])
-        else if (fourthletter === "") letters.push(["", false])
+        else if (fifthletter === "") letters.push(["", false])
 
         event.preventDefault()
         console.log(letters)
@@ -77,23 +78,8 @@ let Form = (props) => {
 
 
     let getMatches = (letters) => {
-        let list = dictionary;
-        // letters[0][0]  letters[0][1]
-        if(letters[0][1]) list.filter(element => element[0] === letters[0][0]) // right place
-        else if (letters[0][0] !== "") list.filter(element => element.contains(letters[0][0])) // wrong place
-
-        if(letters[1][1]) list.filter(element => element[1] === letters[1][0])
-        else if (letters[1][0] !== "") list.filter(element => element.contains(letters[1][0]))
-
-        if(letters[2][1]) list.filter(element => element[2] === letters[2][0])
-        else if (letters[2][0] !== "") list.filter(element => element.contains(letters[2][0]))
-
-        if(letters[3][1]) list.filter(element => element[3] === letters[3][0])
-        else if (letters[3][0] !== "") list.filter(element => element.contains(letters[3][0]))
-
-        if(letters[4][1]) list.filter(element => element[4] === letters[4][0])
-        else if (letters[4][0] !== "") list.filter(element => element.contains(letters[4][0]))
-        console.log(list)
+        
+        setResults(true)
     }
 
 
@@ -121,7 +107,7 @@ let Form = (props) => {
                         Wordle Resolver
                     </Typography>
 
-                    {  results ? (
+                    {  !results ? (
 
                         <Box component="form" noValidate  sx={{ m: 5 }}
                             onSubmit={handleSubmit}
@@ -441,11 +427,11 @@ let Form = (props) => {
                             <List>
 
                                 {
-                                    matches.map((element, i) => (
+                                    list.map((element, i) => (
                                         <ListItem key={i}>
                                             <ListItemText>
                                                 <Typography variant="h6">
-                                                    avatar
+                                                    {element}
                                                 </Typography>
                                             </ListItemText>
                                         </ListItem>
