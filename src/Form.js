@@ -10,6 +10,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 
+import dictionary from './words.js'
+
 let Form = (props) => {
 
     let [firstletter, setFirstletter] = useState('')
@@ -64,6 +66,15 @@ let Form = (props) => {
         event.preventDefault()
         console.log(letters)
     }
+
+
+    let getMatches = (letters) => {
+
+
+
+
+    }
+
 
 
     return (
