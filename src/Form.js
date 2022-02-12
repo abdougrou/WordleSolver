@@ -45,22 +45,20 @@ let Form = (props) => {
 
         let letters = []
 
-        if (firstletter !== "") {
-            letters.push([firstletter.toLowerCase(), firstlettercheck])
-        }
+        if (firstletter !== "") letters.push([firstletter.toLowerCase(), firstlettercheck])
+        else if (firstletter === "") letters.push(["", false])
 
-        if (secondletter !== "") {
-            letters.push([secondletter.toLowerCase(), secondlettercheck])
-        }
-        if (thirdletter !== "") {
-            letters.push([thirdletter.toLowerCase(), thirdlettercheck])
-        }
-        if (fourthletter !== "") {
-            letters.push([fourthletter.toLowerCase(), fourthlettercheck])
-        }
-        if (fifthletter !== "") {
-            letters.push([fifthletter.toLowerCase(), fifthlettercheck])
-        }
+        if (secondletter !== "") letters.push([secondletter.toLowerCase(), secondlettercheck])
+        else if (secondletter === "") letters.push(["", false])
+
+        if (thirdletter !== "") letters.push([thirdletter.toLowerCase(), thirdlettercheck])
+        else if (thirdletter === "") letters.push(["", false])
+
+        if (fourthletter !== "") letters.push([fourthletter.toLowerCase(), fourthlettercheck])
+        else if (fourthletter === "") letters.push(["", false])
+
+        if (fifthletter !== "") letters.push([fifthletter.toLowerCase(), fifthlettercheck])
+        else if (fourthletter === "") letters.push(["", false])
 
 
         event.preventDefault()
