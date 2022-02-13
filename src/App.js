@@ -11,6 +11,7 @@ import createTheme from '@mui/material/styles/createTheme';
 import responsiveFontSizes from '@mui/material/styles/responsiveFontSizes'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -26,7 +27,7 @@ export const light = {
   palette: {
     primary: {
       main: '#008ff0',
-      contrastText: '#FFFFFF',
+      contrastText: '#222b45',
     },
     secondary: {
       main: '#FFFFFF',
@@ -35,6 +36,9 @@ export const light = {
     warning: {
       main: '#FFFFFF',
       contrastText: '#333333',
+    },
+    success: {
+      main: '#008ff0',
     },
     background: {
       default: "#544A7D", 
@@ -60,6 +64,9 @@ export const dark = {
     warning: {
       main: '#222b45',
       contrastText: '#333333',
+    },
+    success: {
+      main: '#FFFFFF',
     },
     background: {
       default: "#544A7D", 
@@ -106,23 +113,25 @@ function App() {
       <AppBar  position="static" sx={{backgroundColor: 'primary', zIndex: 10}}>
         <Container>
           <Toolbar sx={{alignItems: 'center', justifyContent: 'center'}}>
-              <Button sx={{color: 'inherit'}} component={Link} to="/">
-                  Type
+              <Button sx={{color: 'white'}} component={Link} to="/">
+                <Typography variant="body1" sx={{fontWeight: 700}}>
+                  Win Wordle !
+                </Typography>
               </Button>
-              <Button sx={{color: 'inherit'}} component={Link} to="/draw">
+              {/* <Button sx={{color: 'white'}} component={Link} to="/draw">
                   Draw
               </Button>
-              <Button sx={{color: 'inherit'}} component={Link} to="/speak" >
+              <Button sx={{color: 'white'}} component={Link} to="/speak" >
                   Speak
-              </Button>
+              </Button> */}
             </Toolbar>
           </Container>
       </AppBar>
 
       <Routes>
         <Route exact path="/" element={<Form/>} /> 
-        <Route exact path="/draw" element={<Draw/>} /> 
-        <Route exact path="/speak" element={<Form/>} /> 
+        {/* <Route exact path="/draw" element={<Draw/>} /> 
+        <Route exact path="/speak" element={<Form/>} />  */}
       </Routes>
 
     </Router>
