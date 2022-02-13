@@ -1,5 +1,5 @@
 # Word, My World
-Web application helping you solve every Wordle possible. This project was build as part of PolyhacksPolyHacks - Hackatown 2022.
+Web application helping you solve every Wordle possible. This project was built as part of PolyhacksPolyHacks - Hackatown 2022.
 
 ## Demo
 There is a demo that can be accessed right [here](http://wordmyworld.tech)
@@ -8,7 +8,7 @@ There is a demo that can be accessed right [here](http://wordmyworld.tech)
 We draw our inspiration by this cool game called Wordle, where to win, the user needs to figure out in 6 tries, a daily word of 5 letters. For each guess, if a letter is at the right spot, it will be colored in green. If the letter is in the word but not in the right place, it will be in yellow and finally in dark gray if it is not present in the word. With this in mind, we built this app with an alogirithm providing you with all possible combinations for you to succeed your next Wordle!
 
 ## Use Case
-The way it works is simple. The user just inputs the letters he got from Wordle at their given spot (the ones that are in yellow and green). If the letter is at the right spot, he can check the the checkbox "Right place" or else leave it. He can also input the letters that he is sure from Wordle are not present in the word. The algorithm then finds the combinations possible and renders it to the user to chose from and play.
+The way it works is simple. The user just inputs the letters he got from Wordle at their given spot (the ones that are in yellow and green). If the letter is at the right spot, he can check the checkbox "Right place" or else leave it blank. He can also input the letters that he is sure from Wordle are not present in the mystery word. The algorithm then finds the combinations possible and renders them to the user to chose from and play.
 
 ## Getting Setup
 This project assumes that you already have `Node ^14.17.6` & `npm ^6.14.15`. If you do not, please download them from [the official website](https://nodejs.org/en/download/)
