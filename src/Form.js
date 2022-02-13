@@ -80,8 +80,6 @@ let Form = (props) => {
         if (fifthletter !== "") letters.push([fifthletter.toLowerCase(), fifthlettercheck])
         else if (fifthletter === "") letters.push(["", false])
 
-        
-        console.log(letters)
         getMatches(letters)
     }
 
@@ -98,24 +96,23 @@ let Form = (props) => {
 
         for ( let i = 0; i < 5; i++) {
             // Letter
-            if(letters[i][1] && letters[i][0] !== "") {
+            if (letters[i][1] && letters[i][0] !== "") {
                 list = list.filter(element => element.charAt(i) === letters[i][0]) // right place
             } else if (!letters[i][1] && letters[i][0] !== "") {
                 list = list.filter(element => {
                     return element.charAt(i).toLowerCase() !== letters[i][0] && element.includes(letters[i][0]) && !rightPlaces.includes(element.indexOf(letters[i][0]))
                 }) // wrong place
+
+                console.log(list)
             }
         }
   
-
         setMatches(list.splice(0, list.length/2))
         setLoading(false)
-        setResults(true)
-        
+        setResults(true)      
     }
 
     let handleReset = () => {
-
         setFirstletter('')
         setFirstlettercheck(false)    
         setSecondletter('')
@@ -128,8 +125,7 @@ let Form = (props) => {
         setFifthlettercheck(false)
         setResults(false)
         setMatches([])
-        setLoading(false)
-  
+        setLoading(false)  
     }
 
     return (
@@ -137,11 +133,9 @@ let Form = (props) => {
         <Grid container component="main" sx={{ height: '90vh'}}
             alignItems="center"
             justifyContent={'center'}
-            
         >
-
             <Grid item xs={12} sm={10} md={10} lg={8} component={Paper} elevation={6} 
-                sx={{backgroundColor: 'warning.main'}}
+                sx={{backgroundColor: 'warning.main', boxShadow: '0px 0px 15px 5px rgb(1 1 1 / 0.40)', borderRadius: '15px'}}
             >
                 <Box
                     sx={{
@@ -152,10 +146,8 @@ let Form = (props) => {
                     
                     }}
                 >
-                    {/* <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-                        <LockOpenOutlinedIcon />
-                    </Avatar> */}
-                    <Typography component="h1" variant="h5" color='inherit' sx={{fontWeight: 800}}>
+
+                    <Typography variant="h4" color='primary.contrastText' sx={{fontWeight: 800, mb: 1, mt: 1}}>
                         Wordle Resolver
                     </Typography>
 
@@ -183,7 +175,7 @@ let Form = (props) => {
                                     <Typography
                                         textAlign={'center'}
                                         variant="body1"
-                                        sx={{fontWeight: 700}}
+                                        sx={{fontWeight: 700, color: 'primary.contrastText'}}
                                     >
                                         Letter 1
                                     </Typography>
@@ -198,7 +190,9 @@ let Form = (props) => {
                                                 fontSize: 25, 
                                                 borderRadius: 3,
                                                 width: 60, 
-                                                height: 60
+                                                height: 60,
+                                                color: 'black', 
+                                                backgroundColor: 'white'
                                             }
                                         }}
                                         name="firstletter"
@@ -209,7 +203,7 @@ let Form = (props) => {
                                     </Grid>
                                     <Grid item>
                                     <Typography
-                                        sx={{mt: 2, px: 2}}
+                                        sx={{mt: 2, px: 2, color: 'primary.contrastText'}}
                                         textAlign={'center'}
                                         variant="body2"
                                     >
@@ -218,6 +212,12 @@ let Form = (props) => {
                                     </Grid>
                                     <Grid item>
                                     <Checkbox 
+                                        sx={{
+                                            color: 'primary.contrastText',
+                                            '&.Mui-checked': {
+                                                color: 'success.main'
+                                            }
+                                        }}
                                         checked={firstlettercheck}
                                         onChange={e => {
                                                 setFirstlettercheck(!firstlettercheck)
@@ -238,7 +238,7 @@ let Form = (props) => {
                                     <Typography
                                         textAlign={'center'}
                                         variant="body1"
-                                        sx={{fontWeight: 700}}
+                                        sx={{fontWeight: 700, color: 'primary.contrastText'}}
                                     >
                                         Letter 2
                                     </Typography>
@@ -253,7 +253,9 @@ let Form = (props) => {
                                                 fontSize: 25, 
                                                 borderRadius: 3,
                                                 width: 60, 
-                                                height: 60
+                                                height: 60,
+                                                color: 'black', 
+                                                backgroundColor: 'white'
                                             }
                                         }}
                                         name="secondletter"
@@ -264,7 +266,7 @@ let Form = (props) => {
                                     </Grid>
                                     <Grid item>
                                     <Typography
-                                        sx={{mt: 2, px: 2}}
+                                        sx={{mt: 2, px: 2, color: 'primary.contrastText'}}
                                         textAlign={'center'}
                                         variant="body2"
                                     >
@@ -273,6 +275,12 @@ let Form = (props) => {
                                     </Grid>
                                     <Grid item>
                                     <Checkbox 
+                                        sx={{
+                                            color: 'primary.contrastText',
+                                            '&.Mui-checked': {
+                                                color: 'success.main'
+                                            }
+                                        }}
                                         checked={secondlettercheck}
                                         onChange={e => {
                                                 setSecondlettercheck(!secondlettercheck)
@@ -293,7 +301,7 @@ let Form = (props) => {
                                     <Typography
                                         textAlign={'center'}
                                         variant="body1"
-                                        sx={{fontWeight: 700}}
+                                        sx={{fontWeight: 700, color: 'primary.contrastText'}}
                                     >
                                         Letter 3
                                     </Typography>
@@ -308,7 +316,9 @@ let Form = (props) => {
                                                 fontSize: 25, 
                                                 borderRadius: 3,
                                                 width: 60, 
-                                                height: 60
+                                                height: 60,
+                                                color: 'black', 
+                                                backgroundColor: 'white'
                                             }
                                         }}
                                         name="thirdletter"
@@ -319,7 +329,7 @@ let Form = (props) => {
                                     </Grid>
                                     <Grid item>
                                     <Typography
-                                        sx={{mt: 2, px: 2}}
+                                        sx={{mt: 2, px: 2, color: 'primary.contrastText'}}
                                         textAlign={'center'}
                                         variant="body2"
                                     >
@@ -328,6 +338,12 @@ let Form = (props) => {
                                     </Grid>
                                     <Grid item>
                                     <Checkbox 
+                                        sx={{
+                                            color: 'primary.contrastText',
+                                            '&.Mui-checked': {
+                                                color: 'success.main'
+                                            }
+                                        }}
                                         checked={thirdlettercheck}
                                         onChange={e => {
                                                 setThirdlettercheck(!thirdlettercheck)
@@ -348,7 +364,7 @@ let Form = (props) => {
                                     <Typography
                                         textAlign={'center'}
                                         variant="body1"
-                                        sx={{fontWeight: 700}}
+                                        sx={{fontWeight: 700, color: 'primary.contrastText'}}
                                     >
                                         Letter 4
                                     </Typography>
@@ -363,7 +379,9 @@ let Form = (props) => {
                                                 fontSize: 25, 
                                                 borderRadius: 3,
                                                 width: 60, 
-                                                height: 60
+                                                height: 60,
+                                                color: 'black', 
+                                                backgroundColor: 'white'
                                             }
                                         }}
                                         name="fourthletter"
@@ -374,7 +392,7 @@ let Form = (props) => {
                                     </Grid>
                                     <Grid item>
                                     <Typography
-                                        sx={{mt: 2, px: 2}}
+                                        sx={{mt: 2, px: 2, color: 'primary.contrastText'}}
                                         textAlign={'center'}
                                         variant="body2"
                                     >
@@ -384,6 +402,12 @@ let Form = (props) => {
                                     <Grid item>
                                     <Checkbox 
                                         checked={fourthlettercheck}
+                                        sx={{
+                                            color: 'primary.contrastText',
+                                            '&.Mui-checked': {
+                                                color: 'success.main'
+                                            }
+                                        }}
                                         onChange={e => {
                                                 setFourthlettercheck(!fourthlettercheck)
                                             }
@@ -403,7 +427,7 @@ let Form = (props) => {
                                     <Typography
                                         textAlign={'center'}
                                         variant="body1"
-                                        sx={{fontWeight: 700}}
+                                        sx={{fontWeight: 700, color: 'primary.contrastText'}}
                                     >
                                         Letter 5
                                     </Typography>
@@ -418,7 +442,9 @@ let Form = (props) => {
                                                 fontSize: 25, 
                                                 borderRadius: 3,
                                                 width: 60, 
-                                                height: 60
+                                                height: 60, 
+                                                color: 'black', 
+                                                backgroundColor: 'white'
                                             }
                                         }}
                                         name="fifthletter"
@@ -429,7 +455,7 @@ let Form = (props) => {
                                     </Grid>
                                     <Grid item>
                                     <Typography
-                                        sx={{mt: 2, px: 2}}
+                                        sx={{mt: 2, px: 2, color: 'primary.contrastText'}}
                                         textAlign={'center'}
                                         variant="body2"
                                     >
@@ -439,6 +465,14 @@ let Form = (props) => {
                                     <Grid item>
                                     <Checkbox 
                                         checked={fifthlettercheck}
+                                 
+                                        sx={{
+                                            color: 'primary.contrastText',
+                                            '&.Mui-checked': {
+                                                color: 'success.main'
+                                            }
+                                        }}
+                                        
                                         onChange={e => {
                                                 setFifthlettercheck(!fifthlettercheck)
                                             }
@@ -452,9 +486,8 @@ let Form = (props) => {
                             <Button
                                 type="submit"
                                 fullWidth
-                            
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2,}}
+                                sx={{ mt: 3, mb: 2, backgroundColor: "#008ff0", color: 'white'}}
                                 
                             >
                             {loading ? 
@@ -475,7 +508,7 @@ let Form = (props) => {
 
                     ): (
                         <Fragment>
-                        <Box sx={{border: 'solid 1px black', px: '15%', mt: 3}} style={{height: 400, overflowY: 'scroll'}}>
+                        <Box sx={{border: 'solid 1px black', px: '15%', mt: 3}} style={{height: 400, overflowY: 'auto', backgroundColor: 'white', borderRadius: '10px'}}>
                             <List>
 
                                 {
@@ -513,7 +546,8 @@ let Form = (props) => {
                             variant="contained"
                             sx={{ mt: 3, mb: 2,}}   
                             onClick={handleReset}
-                            color="primary"
+                            variant="contained"
+                            sx={{ mt: 5, mb: 2, backgroundColor: "#008ff0", color: 'white'}}
                             >
                             <Typography variant="body1" >
                                 Try Again
