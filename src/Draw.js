@@ -23,7 +23,7 @@ import dictionary from './words.js'
 
 let Draw = (props) => {
 
-    // vision.init({ auth: 'api -key'})
+   
     const location = useLocation()
 
     const [draw1, setDraw1] = useState(false)
@@ -154,7 +154,6 @@ let Draw = (props) => {
         let c = document.getElementById(event.target.id)
         contextRef.current.closePath()
         let dataURL = c.toDataURL('image/png')
-        console.log(dataURL)
 
         if (event.target.id === 'id1'){
             setFirstletter(dataURL)
@@ -167,27 +166,6 @@ let Draw = (props) => {
         } else if (event.target.id === "id5"){
             setFifthletter(dataURL)
         }
-
-
-
-        fetch(`https://api.ocr.space/parse/imageurl?apikey=K84507537888957&url=https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`)
-        .then((res) => {
-            res.json()
-        })
-        .then((data) => {
-            console.log(data)
-        })
-        // const req = new vision.Request({
-        //     image: new vision.Image({
-        //       base64: dataURL,
-        //     }),
-        //     features: [
-        //       new vision.Feature('TEXT_DETECTION', 4),
-        //     ]
-        // })
-
-  
- 
         
         setDraw1(false)
     }

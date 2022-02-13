@@ -156,12 +156,12 @@ let Form = (props) => {
 
     return (
         <Fragment>
-        <Grid container component="main" sx={{ height: '90vh'}}
+        <Grid container component="main" sx={{ height: '90vh', zIndex: -4}}
             alignItems="center"
             justifyContent={'center'}
         >
             <Grid item xs={12} sm={10} md={10} lg={8} component={Paper} elevation={6} 
-                sx={{backgroundColor: 'warning.main', boxShadow: '0px 0px 15px 5px rgb(1 1 1 / 0.40)', borderRadius: '15px'}}
+                sx={{backgroundColor: 'warning.main', boxShadow: '0px 0px 15px 5px rgb(1 1 1 / 0.40)', borderRadius: '15px', zIndex: -4}}
             >
                 <Box
                     sx={{
@@ -169,7 +169,7 @@ let Form = (props) => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    
+                    zIndex: -4
                     }}
                 >
 

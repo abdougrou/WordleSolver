@@ -5,7 +5,6 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 
 import Form from './Form'
-import Draw from './Draw';
 
 import createTheme from '@mui/material/styles/createTheme';
 import responsiveFontSizes from '@mui/material/styles/responsiveFontSizes'
@@ -118,12 +117,7 @@ function App() {
                   Word, My World ❤️
                 </Typography>
               </Button>
-              {/* <Button sx={{color: 'white'}} component={Link} to="/draw">
-                  Draw
-              </Button>
-              <Button sx={{color: 'white'}} component={Link} to="/speak" >
-                  Speak
-              </Button> */}
+             
             </Toolbar>
           </Container>
       </AppBar>
