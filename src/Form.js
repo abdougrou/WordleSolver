@@ -84,14 +84,15 @@ let Form = (props) => {
         if (fifthletter !== "") letters.push([fifthletter.toLowerCase(), fifthlettercheck])
         else if (fifthletter === "") letters.push(["", false])
 
-        getMatches(letters)
+        getMatches(letters, invalidLetters)
     }
 
 
-    let getMatches = (letters) => {
+    let getMatches = (letters, invalidLetters) => {
         let list = dictionary;
         let rightPlaces = [];
         let rightletters= [];
+        let invalidLettersArray = invalidLetters.split(",");
 
         let letterPresent = 0
 
@@ -102,21 +103,21 @@ let Form = (props) => {
             } 
 
             if (letters[i][0] !== ""){
-
-
                 if (rightletters.includes(letters[i][0])){
                     letterPresent++
                 }
-
                 rightletters.push(letters[i][0])
             }
-           
         }
 
-        console.log(rightletters)
         for ( let i = 0; i < 5; i++) {
             if (letterPresent > 2){
                 break;
+            }
+            if (invalidLettersArray.length > 0) {
+                console.log(list)
+                list = list.filter(element => !invalidLettersArray.includes(element.charAt(i).toLowerCase()))
+                console.log(list)
             }
             // Letter
             if (letters[i][1] && letters[i][0] !== "") {
@@ -507,7 +508,7 @@ let Form = (props) => {
                                     />
                                     </Grid>    
                                 </Grid>
-
+                                
                                 <Grid item xs={12} sm={10} md={3}
                                     sx={{px: 1, mt: 2}}
                                 >   
@@ -536,7 +537,6 @@ let Form = (props) => {
 
                             </Grid>
 
-                            
                         
                             <Button
                                 type="submit"
