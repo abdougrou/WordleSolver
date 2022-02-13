@@ -88,14 +88,21 @@ let Form = (props) => {
 
     let getMatches = (letters) => {
         let list = dictionary;
+        let rightPlaces = [];
+
+        for ( let i = 0; i < 5; i++ ) {
+            if ( letters[i][1] && letters[i][0] !== "") {
+                rightPlaces.push(i)
+            }
+        }
+
         for ( let i = 0; i < 5; i++) {
             // Letter
             if(letters[i][1] && letters[i][0] !== "") {
                 list = list.filter(element => element.charAt(i) === letters[i][0]) // right place
-               
             } else if (!letters[i][1] && letters[i][0] !== "") {
                 list = list.filter(element => {
-                    return element.charAt(i).toLowerCase() !== letters[i][0] && element.includes(letters[i][0])
+                    return element.charAt(i).toLowerCase() !== letters[i][0] && element.includes(letters[i][0]) && !rightPlaces.includes(element.indexOf(letters[i][0]))
                 }) // wrong place
             }
         }
