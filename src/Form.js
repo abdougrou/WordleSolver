@@ -87,14 +87,32 @@ let Form = (props) => {
     let getMatches = (letters) => {
         let list = dictionary;
         let rightPlaces = [];
+        let rightletters= [];
+
+        let letterPresent = 0
 
         for ( let i = 0; i < 5; i++ ) {
+            
             if ( letters[i][1] && letters[i][0] !== "") {
                 rightPlaces.push(i)
+            } 
+
+            if (letters[i][0] !== ""){
+
+
+                if (rightletters.includes(letters[i][0])){
+                    letterPresent++
+                }
+
+                rightletters.push(letters[i][0])
             }
+           
         }
 
         for ( let i = 0; i < 5; i++) {
+            if (letterPresent > 2){
+                break;
+            }
             // Letter
             if (letters[i][1] && letters[i][0] !== "") {
                 list = list.filter(element => element.charAt(i) === letters[i][0]) // right place
@@ -102,12 +120,15 @@ let Form = (props) => {
                 list = list.filter(element => {
                     return element.charAt(i).toLowerCase() !== letters[i][0] && element.includes(letters[i][0]) && !rightPlaces.includes(element.indexOf(letters[i][0]))
                 }) // wrong place
-
-                console.log(list)
             }
         }
+
+        if (letterPresent > 2){
+            setMatches([])
+        } else {
+            setMatches(list.splice(0, list.length/2))
+        }
   
-        setMatches(list.splice(0, list.length/2))
         setLoading(false)
         setResults(true)      
     }
