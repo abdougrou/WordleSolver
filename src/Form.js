@@ -41,6 +41,8 @@ let Form = (props) => {
     let [fifthletter, setFifthletter] = useState('')
     let [fifthlettercheck, setFifthlettercheck] = useState(false)
 
+    let [invalidLetters, setInvalidLetters] = useState("")
+
     useEffect(() => {
         handleReset()
     }, [location])
@@ -57,6 +59,8 @@ let Form = (props) => {
             setFourthletter(event.target.value.toUpperCase())
         } else if (event.target.name === "fifthletter"){
             setFifthletter(event.target.value.toUpperCase())
+        } else if (event.target.name === "invalidletters"){
+            setInvalidLetters(event.target.value)
         } 
     }
     
@@ -145,6 +149,7 @@ let Form = (props) => {
         setFourthlettercheck(false)
         setFifthletter('')
         setFifthlettercheck(false)
+        setInvalidLetters("")
         setResults(false)
         setMatches([])
         setLoading(false)  
@@ -509,7 +514,7 @@ let Form = (props) => {
                                     <Typography variant="body1" sx={{color: 'primary.contrastText', textAlign: 'center'}}>Invalid Letters</Typography>
                                     <TextField
                                         margin="normal"
-                                        id="fifthletter"
+                                        id="invalidletters"
                                         placeholder='A,B,C'
                                         InputProps={{
                                             sx: {
@@ -523,10 +528,9 @@ let Form = (props) => {
                                             
                                             }
                                         }}
-                                        name="fifthletter"
-                                        inputProps={{ maxLength: 1 }}
+                                        name="invalidletters"
                                         onChange={handleChange}
-                                        value={fifthletter}
+                                        value={invalidLetters}
                                     />
                                 </Grid>
 
