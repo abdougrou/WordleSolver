@@ -2,7 +2,7 @@
 Web application helping you solve every Wordle possible. This project was build as part of PolyhacksPolyHacks - Hackatown 2022.
 
 ## Demo
-There is a demo that can be accessed right [here](wordmyworld.tech)
+There is a demo that can be accessed right [here](http://wordmyworld.tech)
 
 ## Inspiration
 We draw our inspiration by this cool game called Wordle, where to win, the user needs to figure out in 6 tries, a daily word of 5 letters. For each guess, if a letter is at the right spot, it will be colored in green. If the letter is in the word but not in the right place, it will be in yellow and finally in dark gray if it is not present in the word. With this in mind, we built this app with an alogirithm providing you with all possible combinations for you to succeed your next Wordle!
