@@ -109,6 +109,7 @@ let Form = (props) => {
            
         }
 
+        console.log(rightletters)
         for ( let i = 0; i < 5; i++) {
             if (letterPresent > 2){
                 break;
@@ -501,8 +502,37 @@ let Form = (props) => {
                                     />
                                     </Grid>    
                                 </Grid>
+
+                                <Grid item xs={12} sm={10} md={3}
+                                    sx={{px: 1, mt: 2}}
+                                >   
+                                    <Typography variant="body1" sx={{color: 'primary.contrastText', textAlign: 'center'}}>Invalid Letters</Typography>
+                                    <TextField
+                                        margin="normal"
+                                        id="fifthletter"
+                                        placeholder='A,B,C'
+                                        InputProps={{
+                                            sx: {
+                                                // fontWeight: 800, 
+                                                // fontSize: 25, 
+                                                // borderRadius: 3,
+                                                // width: 60, 
+                                                // height: 60, 
+                                                color: 'black', 
+                                                backgroundColor: 'white', 
+                                            
+                                            }
+                                        }}
+                                        name="fifthletter"
+                                        inputProps={{ maxLength: 1 }}
+                                        onChange={handleChange}
+                                        value={fifthletter}
+                                    />
+                                </Grid>
+
                             </Grid>
 
+                            
                         
                             <Button
                                 type="submit"
