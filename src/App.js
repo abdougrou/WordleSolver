@@ -115,7 +115,7 @@ function App() {
           <Toolbar sx={{alignItems: 'center', justifyContent: 'center'}}>
               <Button sx={{color: 'white'}} component={Link} to="/">
                 <Typography variant="body1" sx={{fontWeight: 700}}>
-                  Win Wordle !
+                  Word, My World ❤️
                 </Typography>
               </Button>
               {/* <Button sx={{color: 'white'}} component={Link} to="/draw">

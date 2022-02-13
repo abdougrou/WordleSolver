@@ -508,24 +508,20 @@ let Form = (props) => {
                                     </Grid>    
                                 </Grid>
 
-                                <Grid item xs={12} sm={10} md={3}
-                                    sx={{px: 1, mt: 2}}
+                                <Grid item xs={10} sm={4} md={3}
+                                    sx={{px: 1, mt: 2, mx: '15%'}}
                                 >   
-                                    <Typography variant="body1" sx={{color: 'primary.contrastText', textAlign: 'center'}}>Invalid Letters</Typography>
+                                    <Typography variant="body1" sx={{color: 'primary.contrastText', textAlign: 'center', fontWeight: 700}}>Invalid Letters</Typography>
                                     <TextField
                                         margin="normal"
                                         id="invalidletters"
                                         placeholder='A,B,C'
                                         InputProps={{
                                             sx: {
-                                                // fontWeight: 800, 
-                                                // fontSize: 25, 
-                                                // borderRadius: 3,
-                                                // width: 60, 
-                                                // height: 60, 
+                                                borderRadius: 3,
                                                 color: 'black', 
                                                 backgroundColor: 'white', 
-                                            
+                                                mb: 2
                                             }
                                         }}
                                         name="invalidletters"
